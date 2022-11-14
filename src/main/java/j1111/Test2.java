@@ -7,7 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/T2")
+//@WebServlet("/T2")		//컨트롤러
+
 public class Test2 extends HttpServlet {
     //405번 에러 전송방식에 에러생김 (ex> get post)
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
