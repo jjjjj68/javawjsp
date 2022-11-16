@@ -23,9 +23,12 @@ public class Test2 extends HttpServlet {
 //		String mid = request.getParameter("mid");
 		System.out.println("전송방식 : " +request.getMethod());
 		
+		System.out.println("접속아이피 : " + request.getRemoteAddr());
+		
 		String mid = request.getParameter("mid")==null ? "" : request.getParameter("mid");
 		String pwd = request.getParameter("pwd")==null ? "" : request.getParameter("pwd");
 		String name = request.getParameter("name")==null ? "" : request.getParameter("name");
+		String hostIp = request.getParameter("hostIp");
 		
 		mid = mid.trim();
 		name = name.trim();
@@ -35,7 +38,7 @@ public class Test2 extends HttpServlet {
 		if(mid.equals("admin") && pwd.equals("1234")) {
 			out.println("<script>");
 			out.println("alert('관리자 인증 성공~~~');");
-			out.println("location.href='"+request.getContextPath()+"/study/1114/test2Res.jsp?mid="+mid+"&name="+name+"';");
+			out.println("location.href='"+request.getContextPath()+"/study/1114/test2Res.jsp?mid="+mid+"&name="+name+"&hostIp="+hostIp+"';");
 			out.println("</script>");
 		}
 		else {
