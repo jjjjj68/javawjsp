@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>guList.jsp</title>
+  <title>guList_기본.jsp</title>
   <jsp:include page="/include/bs4.jsp"></jsp:include>
   <style>
     th {
@@ -27,7 +27,7 @@
 <body>
 <jsp:include page="/include/header.jsp" />
 <p><br/></p>
-
+<div class="container">
   <h2 class="text-center">방 명 록 리 스 트</h2>
   <br/>
   <table class="table table-borderless mb-0">
@@ -39,27 +39,11 @@
 		  <td style="text-align:right;"><a href="${ctp}/guest/guInput.gu" class="btn btn-sm btn-secondary">글쓰기</a></td>
 		</tr>
   </table>
-  <table class="table table-borderless m-0 p-0">
-		<tr>
-		  <td class="text-right">
-		  	<!-- 첫페이지 / 이전페이지 / (현페이지번호/총페이지수) /다음페이지 / 마지막페이지 -->
-		  	<c:if test="${pag > 1}">
-		  		[<a href="${ctp}/guList.gu?pag=1">첫페이지</a>]
-		  		[<a href="${ctp}/guList.gu?pag=${pag-1}">이전페이지</a>]
-		  	</c:if>
-				${pag}/${totPage}
-		  	<c:if test="${pag < totPage}">
-		  		[<a href="${ctp}/guList.gu?pag=${pag+1}">다음페이지</a>]
-		  		[<a href="${ctp}/guList.gu?pag=${totPage}">마지막페이지</a>]
-		  	</c:if>
-		  </td>
-		</tr>
-  </table>
-  <c:set var ="curScrStarNo" value= "${curScrStarNo}"/>
+  <c:set var ="no" value= "${fn:length(vos)}"/>
   <c:forEach var="vo" items="${vos}" varStatus="st">
 	  <table class="table table-borderless mb-0">
 			<tr>
-			  <td>방문번호 : ${curScrStarNo}
+			  <td>방문번호 : ${no}
 		  		<c:if test="${sAMid == 'admin'}"><a href="javascript:delCheck(${vo.idx})" class="btn btn-sm btn-danger">삭제</a></c:if>
 			  </td>
 			  <td style="text-align:right;">방문IP : ${vo.hostIp}</td>
@@ -89,36 +73,9 @@
 			</tr>
 	  </table>
 	  <br/>
-	  <c:set var="curScrStarNo" value="${curScrStarNo-1}"/>
+	  <c:set var="no" value="${no-1}"/>
 	</c:forEach>
-	<br/>
-	<div class="container">
-	<!-- 첫페이지 / 이전블록 / 1(4) 2(5) 3(6) / 다음블록 / 마지막페이지-->
-		<div class="text-center">
-			<ul class="pagination  justify-content-center">
-				<c:if test="${pag > 1}">
-					<li class="page-item"><a class="page-link text-secondary" href="${ctp}/guList.gu?pag=1">첫페이지</a></li>
-				</c:if>
-				<c:if test="${curBlock > 0}">
-					<li class="page-item"><a class="page-link text-secondary" href="${ctp}/guList.gu?pag=${(curBlock-1) * blockSize +1}">이전블록</a></li>
-				</c:if>
-				<c:forEach var="i" begin="${(curBlock) * blockSize +1}" end="${(curBlock) * blockSize + blockSize}" varStatus="st">
-					<c:if test="${i <= totPage && i == pag}">
-						<li class="page-item active"><a class="page-link bg-secondary border-secondary" href="${ctp}/guList.gu?pag=${i}">${i}</a></li>
-					</c:if>	
-					<c:if test="${i <= totPage && i != pag}">
-						<li class="page-item"><a class="page-link text-secondary" href="${ctp}/guList.gu?pag=${i}">${i}</a></li>
-					</c:if>	
-				</c:forEach>
-				<c:if test="${curBlock < lastBlock}">
-					<li class="page-item"><a class="page-link text-secondary" href="${ctp}/guList.gu?pag=${(curBlock+1) * blockSize +1}">다음블록</a></li>
-				</c:if>
-				<c:if test="${pag < totPage}">
-					<li class="page-item"><a class="page-link text-secondary" href="${ctp}/guList.gu?pag=${totPage}">마지막페이지</a></li>
-				</c:if>
-			</ul>
-		</div>
-	</div>
+</div>
 <p><br/></p>
 <jsp:include page="/include/footer.jsp" />
 </body>
