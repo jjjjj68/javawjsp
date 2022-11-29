@@ -11,7 +11,7 @@ public class MemberVO {
  private String tel;
  private String address;
  private String email;
- private String homPage;
+ private String homePage;
  private String job;
  private String hobby;
  private String photo;
@@ -85,11 +85,11 @@ public class MemberVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getHomPage() {
-		return homPage;
+	public String getHomePage() {
+		return homePage;
 	}
-	public void setHomPage(String homPage) {
-		this.homPage = homPage;
+	public void setHomePage(String homePage) {
+		this.homePage = homePage;
 	}
 	public String getJob() {
 		return job;
@@ -167,10 +167,8 @@ public class MemberVO {
 	public String toString() {
 		return "MemberVO [idx=" + idx + ", mid=" + mid + ", pwd=" + pwd + ", nickName=" + nickName + ", name=" + name
 				+ ", gender=" + gender + ", birthday=" + birthday + ", tel=" + tel + ", address=" + address + ", email=" + email
-				+ ", homPage=" + homPage + ", job=" + job + ", hobby=" + hobby + ", photo=" + photo + ", content=" + content
+				+ ", homePage=" + homePage + ", job=" + job + ", hobby=" + hobby + ", photo=" + photo + ", content=" + content
 				+ ", userInfor=" + userInfor + ", userDel=" + userDel + ", point=" + point + ", level=" + level + ", visitCnt="
 				+ visitCnt + ", startDate=" + startDate + ", lastDate=" + lastDate + ", todayCnt=" + todayCnt + "]";
 	}
-	 
-	 
-	}
+} 

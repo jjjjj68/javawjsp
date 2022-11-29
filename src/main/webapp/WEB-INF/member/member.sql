@@ -32,3 +32,4 @@ desc member;
 
 insert into member values (default,'admin','1234','관리맨','관리자',default,default,'010-1234-1234','청주시 용암동','lee123@naver.com','http://naver.com','학생','음악/걷기',default,'관리자입니다',default,default,default,0,default,default,default,default);
 
+select * from member;

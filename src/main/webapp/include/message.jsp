@@ -25,8 +25,18 @@
 			else if(msg == "guDeleteOK") msg = "삭제!";
 			else if(msg == "guDeleteNO") msg = "앙대!";
 			else if(msg == "loginOK") msg = val+" 로그인성공!";
-			else if(msg == "loginNO") msg =  vla+" 로그인앙대!";
+			else if(msg == "loginNO") msg =  " 로그인앙대!";
 			else if(msg == "memLogoutOK") msg = val+ " 로그아웃!!";
+			else if(msg == "idCheckNO") msg = " 중복된 아이디!!!";
+			else if(msg == "nickCheckNO") msg = " 중복된 닉네임!!!";
+			else if(msg == "memJoinOK") msg = " 회원에 가입 됬다!!!!";
+			else if(msg == "memJoinON") msg = " 회원에 가입 앙대!!!!";
+			else if(msg == "passwordNO") msg = " 비밀번호 확인해따!!!!!";
+			else if(msg == "passwordOK") msg = " 비밀번호 변경했어!!!!!";
+			else if(msg == "passwordOKNO") msg = " 비밀번호 변경 실패 했어!!!!!";
+			else if(msg == "passwordYes") msg = " 회원정보 변경페이지로 이동!!!!!!";
+			else if(msg == "memUpdateOK") msg = " 회원정보 변경되었습니다";
+			else if(msg == "memUpdateNO") msg = " 회원정보 변경 실패!!!";
 			
 		/*
 		서버에서 클라이언트에 줄수는 있지만, 클라이언트에서 서버로 주는건 안됨

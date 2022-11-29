@@ -38,6 +38,11 @@ public class MemberController extends HttpServlet {
 			command.execute(request, response);
 			viewPage += "/memMain.jsp";
 		}
+		else if(com.equals("/memNickCheck")) {
+			command = new MemNickCheckCommand();
+			command.execute(request, response);
+			viewPage += "/memNickCheck.jsp";
+		}
 		else if(com.equals("/memIdCheck")) {
 			command = new MemIdCheckCommand();
 			command.execute(request, response);
@@ -47,7 +52,45 @@ public class MemberController extends HttpServlet {
 			viewPage += "/memJoin.jsp";
 		}
 		else if(com.equals("/memJoinOK")) {
-			viewPage += "/memLogin.jsp";
+			command = new MemJoinOKCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
+		}
+		else if(com.equals("/memList")) {
+			command = new MemListCommand();
+			command.execute(request, response);
+			viewPage += "/memList.jsp";
+		}
+		else if(com.equals("/memInfor")) {
+			command = new MemInforCommand();
+			command.execute(request, response);
+			viewPage += "/memInfor.jsp";
+		}
+		else if(com.equals("/memUpdatePwd")) {
+			viewPage += "/memUpdatePwd.jsp";
+		}
+		else if(com.equals("/memUpdatePwdOK")) {
+			command = new MemUpdatePwdOKCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
+		}
+		else if(com.equals("/memPwdCheck")) {
+			viewPage += "/memPwdCheck.jsp";
+		}
+		else if(com.equals("/memPwdCheckOK")) {
+			command = new MemPwdCheckOKCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
+		}
+		else if(com.equals("/memUpdate")) {
+			command = new MemUpdateCommand();
+			command.execute(request, response);
+			viewPage += "/memUpdate.jsp";
+		}
+		else if(com.equals("/memUpdateOK")) {
+			command = new MemUpdateOKCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
