@@ -37,6 +37,8 @@
 			else if(msg == "passwordYes") msg = " 회원정보 변경페이지로 이동!!!!!!";
 			else if(msg == "memUpdateOK") msg = " 회원정보 변경되었습니다";
 			else if(msg == "memUpdateNO") msg = " 회원정보 변경 실패!!!";
+			else if(msg == "boInputOk") msg = " 게시글이 입력되었습니다.";
+			else if(msg == "boInputNo") msg = " 게시글이 입력 취소~~";
 			
 		/*
 		서버에서 클라이언트에 줄수는 있지만, 클라이언트에서 서버로 주는건 안됨

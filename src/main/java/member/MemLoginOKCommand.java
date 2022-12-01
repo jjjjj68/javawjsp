@@ -60,7 +60,7 @@ public class MemLoginOKCommand implements MemberInterface {
 			nowTodayPoint = vo.getPoint() + 10;
 		}
 		// 오늘 재방문이라면 '총방문수','오늘방문수','포인트' 누적처리
-		dao.setMemberTotalUpdate(mid, nowTodayPoint);
+		dao.setMemTotalUpdate(mid, nowTodayPoint);
 		
 		// 4.
 		Cookie cookieMid = new Cookie("cMid", mid);

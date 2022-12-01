@@ -80,7 +80,7 @@ public class MemUpdateOKCommand implements MemberInterface {
 		vo.setContent(content);
 		vo.setUserInfor(userInfor);
 		
-		int res = dao.setMemberUpdateOK(vo);
+		int res = dao.setMemberUpdateOk(vo);
 		
 		// 정보가 변경되었으면 새로운 닉네임을 세션에 저장처리한다.
 		session.setAttribute("sNickName", nickName);

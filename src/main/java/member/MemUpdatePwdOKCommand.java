@@ -33,7 +33,7 @@ public class MemUpdatePwdOKCommand implements MemberInterface {
 			return;
 		}
 		
-		int res =dao.setMemUpdatePwdOK(mid, newPwd);
+		int res =dao.setMemUpdatePwdOk(mid, newPwd);
 		
 		if(res == 1) {
 			request.setAttribute("msg", "passwordOK");

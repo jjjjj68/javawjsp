@@ -1,0 +1,82 @@
+show tables;
+
+create table board (
+	idx int not null auto_increment,		/* 게시글의 고유번호 */
+	nickName varchar(20) not null,			/* 게시글 올린 사람의 닉네임 */
+	title		 varchar(100) not null,     /* 게시글의 글 제목 */
+	email		 varchar(50),								/* 글쓴이의 메일주소(회원가입시에 필수 입력처리되어있다) */
+	homePage varchar(50),								/* 글쓴이의 홈페이지(블로그)주소 */
+	content	 text not null,							/* 글 내용 */
+	wDate		 datetime default now(),		/* 글 올린 날짜 */
+	hostIp	 varchar(50) not null,			/* 글 올린이의 접속 IP */
+	readNum	 int default 0,							/* 글 조회수 */
+	good		 int default 0,							/* 좋아요 클릭 횟수 */
+	mid		   varchar(20) not null,			/* 회원 아이디(내가 올린 게시글 전체 조회시체 사용) */
+	primary key(idx)
+);
+drop table board;
+desc board;
+
+insert into board values (default,'관장님','게시판 서비스를 시작합니다','lee123@naver.com','naver.com','이곳은 게시판입니다',default,'192.168.50.71',default,default,'admin');
+select * from board;
+
+
+/* 날짜 처리 연습 */
+select now();		-- now() : 오늘 날짜와 시간을 보여준다.
+
+select year(now()); --year() : '년도' 출력
+select month(now()); --month() : '월' 출력
+select day(now()); --day() : '일' 출력
+select date(now()); --date() : '년-월-일' 출력
+select weekday(now()); --weekday() : '요일' 출력  0(월), 1(화), 2(수), 3(목), 4(금), 5(토), 6(일)
+select dayofweek(now()); --dayofweek() : '요일' 출력  1(일),2(월),3(화),4(수),5(목),6(금),7(토)
+select hour(now());		--hour() : 시간
+select minute(now());		--minute() : 분
+select second(now());		--second() : 초
+
+select year('2022-12-1');
+select idx,year(wDate) from board;
+select idx,day(wDate) as 날짜 from board;
+select idx, wDate,weekday(wDate) from board;
+
+/* 날짜연산 */
+-- date_add(date, interval 값 type)
+select date_add(now(), interval 1 day);		/* 오늘날짜보다 +1일 출력 */
+select date_add(now(), interval -1 day);		/* 오늘날짜보다 -1일 출력 */
+select date_add(now(), interval 10 day_hour);		/* 오늘날짜보다 +10시간 출력 */
+select date_add(now(), interval -10 day_hour);		/* 오늘날짜보다 -10시간 출력 */
+
+-- date_sub(date, interval 값 type) (add랑 반대 개념)
+select date_sub(now(), interval 1 day); /* 오늘날짜보다 -1일 출력 */
+select date_sub(now(), interval -1 day); /* 오늘날짜보다 +1일 출력 */
+
+-- date_format(날짜, '양식기호')
+-- 년도(2자리):%y 년도(2자리):%Y 월(영문):%M, 월(숫자):%m, 일:%d,
+-- 시(12시간제):%h, 시(24시간제):%H , 분:%i, 초:%s
+select idx, wDate from board;
+select idx, date_format(wDate, '%y-%M-%d')wDate from board; --%M 월을 영문출력
+select idx, date_format(wDate, '%y-%m-%d')wDate from board; --%m 월을 숫자출력
+select idx, date_format(wDate, '%Y-%m-%d')wDate from board; --%m 월을 숫자출력
+select idx, date_format(wDate, '%h-%i-%s')wDate from board; 
+select idx, date_format(wDate, '%H-%i-%s')wDate from board; 
+
+-- 현재부터 한달전의 날짜
+select date_sub(now(), interval 1 month);
+
+-- 하루전 체크
+select date_sub(now(), interval 1 day);
+select date_sub(now(), interval 1 day), wDate from board;
+
+-- 날짜차이 계산 : DATEDIFF(시작날짜,마지막날짜)
+select datediff(now(),'2022-12-01');
+select datediff(now(),'2022-11-30');
+select idx, wDate, datediff(now(),wDAte) from board;
+select idx, wDate, datediff(now(),wDAte) as day_diff from board; --프로그래밍하기 위해서 변수에 담아줌
+select *, datediff(now(),wDAte)  from board; --프로그래밍하기 위해서 변수에 담아줌, 필드 추가
+
+select timestampdiff(hour, wDate, '2022-11-30') from board;
+select timestampdiff(hour, '2022-11-30', now()) from board;
+select *, timestampdiff(hour, wDate, now()) as hour_diff from board; --시간으로 표현하기
+select *, datediff(now(), wDate) as day_diff, timestampdiff(hour, wDate, now()) as hour_diff from board;
+
+

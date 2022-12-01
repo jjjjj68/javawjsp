@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @SuppressWarnings("serial")
 @WebServlet("*.mem")
@@ -20,33 +21,18 @@ public class MemberController extends HttpServlet {
 		String uri = request.getRequestURI();
 		String com = uri.substring(uri.lastIndexOf("/"), uri.lastIndexOf("."));
 		
+//		HttpSession session = request.getSession();
+//		int level = session.getAttribute("sLevel")==null ? 99 : (int) session.getAttribute("sLevel");
+
 		if(com.equals("/memLogin")) {
+			command = new MemLoginCommand();
+			command.execute(request, response);
 			viewPage += "/memLogin.jsp";
 		}
 		else if(com.equals("/memLoginOK")) {
 			command = new MemLoginOKCommand();
 			command.execute(request, response);
 			viewPage = "/include/message.jsp";
-		}
-		else if(com.equals("/memLogOut")) {
-			command = new MemLogOutCommand();
-			command.execute(request, response);
-			viewPage = "/include/message.jsp";
-		}
-		else if(com.equals("/memMain")) {
-			command = new MemMainCommand();
-			command.execute(request, response);
-			viewPage += "/memMain.jsp";
-		}
-		else if(com.equals("/memNickCheck")) {
-			command = new MemNickCheckCommand();
-			command.execute(request, response);
-			viewPage += "/memNickCheck.jsp";
-		}
-		else if(com.equals("/memIdCheck")) {
-			command = new MemIdCheckCommand();
-			command.execute(request, response);
-			viewPage += "/memIdCheck.jsp";
 		}
 		else if(com.equals("/memJoin")) {
 			viewPage += "/memJoin.jsp";
@@ -55,6 +41,30 @@ public class MemberController extends HttpServlet {
 			command = new MemJoinOKCommand();
 			command.execute(request, response);
 			viewPage = "/include/message.jsp";
+		}
+		else if(com.equals("/memIdCheck")) {
+			command = new MemIdCheckCommand();
+			command.execute(request, response);
+			viewPage += "/memIdCheck.jsp";
+		}
+		else if(com.equals("/memNickCheck")) {
+			command = new MemNickCheckCommand();
+			command.execute(request, response);
+			viewPage += "/memNickCheck.jsp";
+		}
+//		else if(level >= 4) {	// 세션이 끈겼다면 작업의 진행을 중시시키고 홈으로 전송시켜준다.
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("/");
+//			dispatcher.forward(request, response);
+//		}
+		else if(com.equals("/memLogout")) {
+			command = new MemLogOutCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
+		}
+		else if(com.equals("/memMain")) {
+			command = new MemMainCommand();
+			command.execute(request, response);
+			viewPage += "/memMain.jsp";
 		}
 		else if(com.equals("/memList")) {
 			command = new MemListCommand();
@@ -69,7 +79,7 @@ public class MemberController extends HttpServlet {
 		else if(com.equals("/memUpdatePwd")) {
 			viewPage += "/memUpdatePwd.jsp";
 		}
-		else if(com.equals("/memUpdatePwdOK")) {
+		else if(com.equals("/memUpdatePwdOk")) {
 			command = new MemUpdatePwdOKCommand();
 			command.execute(request, response);
 			viewPage = "/include/message.jsp";
@@ -77,7 +87,7 @@ public class MemberController extends HttpServlet {
 		else if(com.equals("/memPwdCheck")) {
 			viewPage += "/memPwdCheck.jsp";
 		}
-		else if(com.equals("/memPwdCheckOK")) {
+		else if(com.equals("/memPwdCheckOk")) {
 			command = new MemPwdCheckOKCommand();
 			command.execute(request, response);
 			viewPage = "/include/message.jsp";
@@ -87,8 +97,18 @@ public class MemberController extends HttpServlet {
 			command.execute(request, response);
 			viewPage += "/memUpdate.jsp";
 		}
-		else if(com.equals("/memUpdateOK")) {
+		else if(com.equals("/memUpdateOk")) {
 			command = new MemUpdateOKCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
+		}
+		else if(com.equals("/memMemberSearch")) {
+			command = new MemberSearchCommand_bak();
+			command.execute(request, response);
+			viewPage += "/memList.jsp";
+		}
+		else if(com.equals("/memDelete")) {
+			command = new MemDeleteCommand();
 			command.execute(request, response);
 			viewPage = "/include/message.jsp";
 		}

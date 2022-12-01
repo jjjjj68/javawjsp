@@ -88,7 +88,7 @@ public class MemJoinOKCommand implements MemberInterface {
 		vo.setContent(content);
 		vo.setUserInfor(userInfor);
 		
-		int res = dao.setMemberJoinOK(vo);
+		int res = dao.setMemberJoinOk(vo);
 		
 		if(res ==1 ) { 
 			request.setAttribute("msg", "memJoinOK");
