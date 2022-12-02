@@ -20,6 +20,24 @@ desc board;
 insert into board values (default,'관장님','게시판 서비스를 시작합니다','lee123@naver.com','naver.com','이곳은 게시판입니다',default,'192.168.50.71',default,default,'admin');
 select * from board;
 
+/* 게시판에 댓글 달기 */
+create table boardReply (
+	idx		int not null auto_increment, /* 댓글의 고유번호 */
+	boardIdx int not null,						 /* 원본글의 고유번호(외래키로 지정) */
+	mid			 varchar(20) not null,		 /* 댓글 올린이의 아이디 */
+	nickName varchar(20) not null, 		 /* 댓글 올린이의 닉네임 */
+	wDate    datetime default now(),   /* 댓글 올린 날짜 */
+	hostIp	 varchar(50) not null,   	 /* 댓글 올린 PC IP */
+	content	 text not null,						 /* 댓글 내용 */
+	primary key(idx),
+	foreign key(boardIdx) references board(idx)
+);
+desc boardReply;
+	/*
+	on update cascade	/* 부모키에 따라서 같이 업데이트 */
+	on delete restrict /* 부모기에 따라서 삭제 같이함? */
+	*/
+
 
 /* 날짜 처리 연습 */
 select now();		-- now() : 오늘 날짜와 시간을 보여준다.
@@ -78,5 +96,9 @@ select timestampdiff(hour, wDate, '2022-11-30') from board;
 select timestampdiff(hour, '2022-11-30', now()) from board;
 select *, timestampdiff(hour, wDate, now()) as hour_diff from board; --시간으로 표현하기
 select *, datediff(now(), wDate) as day_diff, timestampdiff(hour, wDate, now()) as hour_diff from board;
+
+/* 이전글 다음글 체크 */
+select * from board where idx < 6 order by idx desc limit 1;   /* 이전글 */
+select * from board where idx > 6 limit 1;   /* 다음글 */
 
 
