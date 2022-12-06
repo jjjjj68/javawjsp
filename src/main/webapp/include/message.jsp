@@ -46,6 +46,8 @@
 			else if(msg == "boUpdateNo") msg = "게시글 수정 실패!!";
 			else if(msg == "upLoad1Ok") msg = "파일 업로드 성공!!";
 			else if(msg == "upLoad1No") msg = "파일 업로드 실패!!";
+			else if(msg == "pdsInputOk") msg = "자료실에 파일이 업로드 되었습니다.";
+			else if(msg == "pdsInputNo") msg = "자료실에 파일이 업로드 실패!!";
 			
 		/*
 		서버에서 클라이언트에 줄수는 있지만, 클라이언트에서 서버로 주는건 안됨

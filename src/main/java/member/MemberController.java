@@ -38,7 +38,7 @@ public class MemberController extends HttpServlet {
 			viewPage += "/memJoin.jsp";
 		}
 		else if(com.equals("/memJoinOK")) {
-			command = new MemJoinOKCommand();
+			command = new MemJoinOkCommand();
 			command.execute(request, response);
 			viewPage = "/include/message.jsp";
 		}
