@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import conn.SecurityUtil;
 
-public class PdsDeleteCommand implements PdsInterface {
+public class PdsPwdCheckCommand implements PdsInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int pag = request.getParameter("pag")==null ? 0 : Integer.parseInt(request.getParameter("pag"));
+		String part = request.getParameter("part")==null ? "전체" : request.getParameter("part");
 		int idx = request.getParameter("idx")==null ? 0 : Integer.parseInt(request.getParameter("idx"));
 		String pwd = request.getParameter("pwd")==null ? "" : request.getParameter("pwd");
 		String fSName_ = request.getParameter("fSName")==null ? "" : request.getParameter("fSName");
@@ -24,6 +26,8 @@ public class PdsDeleteCommand implements PdsInterface {
 		
 		PdsDAO dao = new PdsDAO();
 		PdsVO vo = dao.getIdxSearch(idx);
+		String res = "";
+		
 		
 		if(vo.getPwd().equals(pwd)) {
 			// 파일이 저장되어 있는 서버의 실제 경로를 찾아온다.
@@ -38,10 +42,18 @@ public class PdsDeleteCommand implements PdsInterface {
 			}
 			
 			// 파일 삭제 완료후 DB에 저장된 자료파일을 삭제한다.
-			String res = dao.setPdsDelete(idx);
+			res = dao.setPdsDelete(idx);
 			
-			response.getWriter().write(res);
+//			response.getWriter().write(res);
+			
 		}
+		if(res.equals("1")) {
+			request.setAttribute("msg", "pdsDeleteOk");
+		}
+		else {
+			request.setAttribute("msg", "pdsDeleteNo");
+		}
+		request.setAttribute("url", request.getContextPath()+"/pdsList.pds?part="+part+"&pag="+pag);
 	}
 
 }

@@ -48,6 +48,8 @@
 			else if(msg == "upLoad1No") msg = "파일 업로드 실패!!";
 			else if(msg == "pdsInputOk") msg = "자료실에 파일이 업로드 되었습니다.";
 			else if(msg == "pdsInputNo") msg = "자료실에 파일이 업로드 실패!!";
+			else if(msg == "pdsDeleteOk") msg = "자료파일 삭제 완료!!";
+			else if(msg == "pdsDeleteNo") msg = "자료파일 삭제 실패!!";
 			
 		/*
 		서버에서 클라이언트에 줄수는 있지만, 클라이언트에서 서버로 주는건 안됨

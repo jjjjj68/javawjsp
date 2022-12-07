@@ -9,19 +9,42 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.BoardVO;
 
-public class PdsListCommand implements PdsInterface {
+public class PdsSearchCommand implements PdsInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//자료 리스트의 콤보박스
-		String part = request.getParameter("part")==null ? "전체" : request.getParameter("part");
+		String search = request.getParameter("search")==null ? "" : request.getParameter("search");
+		String searchString = request.getParameter("searchString")==null ? "" : request.getParameter("searchString");
+		int pageSize = request.getParameter("pageSize")==null ? 5 : Integer.parseInt(request.getParameter("pageSize"));
+		int pag = request.getParameter("pag")==null ? 1 : Integer.parseInt(request.getParameter("pag"));
+		
 		
 		PdsDAO dao = new PdsDAO();
 		
+		ArrayList<PdsVO> vos = dao.getPdsContentSearch(search, searchString);
+		
+		String searchTitle = "";
+		if(search.equals("title")) searchTitle = "글제목";
+		else if(search.equals("nickName")) searchTitle = "닉네임";
+		else searchTitle = "글내용";
+		
+		request.setAttribute("vos", vos);
+		request.setAttribute("search", search);
+		request.setAttribute("searchString", searchString);
+		request.setAttribute("searchCount", vos.size());
+		request.setAttribute("searchTitle", searchTitle);
+		request.setAttribute("pag", pag);
+		request.setAttribute("pageSize", pageSize);
+		
+		
+		
+		
+		
+		/*
 		// 페이징처리 준비 시작
 		int pag = request.getParameter("pag")==null ? 1 : Integer.parseInt(request.getParameter("pag"));
 		int pageSize = request.getParameter("pageSize")==null ? 5 : Integer.parseInt(request.getParameter("pageSize"));
-		int totRecCnt = dao.totRecCnt(part);
+		int totRecCnt = dao.totRecCnt();
 		int totPage = (totRecCnt % pageSize)==0 ? totRecCnt / pageSize : (totRecCnt / pageSize) + 1;
 		int startIndexNo = (pag - 1) * pageSize;
 		int curScrStartNo = totRecCnt - startIndexNo;
@@ -31,7 +54,7 @@ public class PdsListCommand implements PdsInterface {
 		int curBlock = (pag - 1) / blockSize;
 		int lastBlock = (totPage - 1) / blockSize;
 		
-		ArrayList<PdsVO> vos = dao.getPdsList(startIndexNo, pageSize, part);
+		ArrayList<BoardVO> vos = dao.getBoList(startIndexNo, pageSize);
 		
 		request.setAttribute("vos", vos);
 		request.setAttribute("pag", pag);
@@ -41,9 +64,7 @@ public class PdsListCommand implements PdsInterface {
 		request.setAttribute("blockSize", blockSize);
 		request.setAttribute("curBlock", curBlock);
 		request.setAttribute("lastBlock", lastBlock);
-		
-		request.setAttribute("startIndexNo", startIndexNo);
-		request.setAttribute("part", part);
+		*/
 	}
 
 }
