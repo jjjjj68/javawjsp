@@ -249,8 +249,8 @@ public class PdsDAO {
 					vo.setOpenSw(rs.getString("openSw"));
 					vo.setContent(rs.getString("content"));
 					vo.setHostIp(rs.getString("hostIp"));
-//				vo.setDay_diff(rs.getInt("day_diff"));
-//				vo.setHour_diff(rs.getInt("hour_diff"));
+					vo.setDay_diff(rs.getInt("day_diff"));
+					vo.setHour_diff(rs.getInt("hour_diff"));
 				
 				vos.add(vo);
 			}
